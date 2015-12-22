@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Sirateck_Lemonway extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Sirateck
+ * @package        Sirateck_Lemonway
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <Sirateck_Lemonwaymkt>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Core />
+                <Sirateck_Lemonway />
+                <Webkul_Marketplace />
+             </depends>
+        </Sirateck_Lemonwaymkt>
+    </modules>
+</config>

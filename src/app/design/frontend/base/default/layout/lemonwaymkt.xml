@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<layout version="0.1.0">
+		 <customer_account>
+		 	 <reference name="marketplacenavigation">
+		        	<block type="core/template" name="lw.account.link" template="lemonwaymkt/account_link.phtml" />
+		        </reference>
+		 </customer_account>
+		<lemonwaymkt_account_index>
+		 		<update handle="customer_account" />
+		        <reference name="content">
+		            <block type="lemonwaymkt/account" name="lw.account" template="lemonwaymkt/account.phtml" />
+		        </reference>
+		</lemonwaymkt_account_index>
+		<lemonwaymkt_account_addiban>
+			<update handle="customer_account" />
+			<reference name="content">
+		            <block type="core/template" name="lw.account.iban" template="lemonwaymkt/iban/form.phtml" />
+		     </reference>
+		</lemonwaymkt_account_addiban>
+		<lemonwaymkt_account_domoneyout>
+			<update handle="customer_account" />
+			<reference name="content">
+		            <block type="lemonwaymkt/account" name="lw.account.moneyout" template="lemonwaymkt/moneyout/form.phtml" />
+		     </reference>
+		</lemonwaymkt_account_domoneyout>
+		<lemonwaymkt_account_uploaddoc>
+			<update handle="customer_account" />
+			<reference name="content">
+		            <block type="lemonwaymkt/account" name="lw.account.uploaddoc" template="lemonwaymkt/wallet/upload_doc.phtml" />
+		     </reference>
+		</lemonwaymkt_account_uploaddoc>
+	</layout>

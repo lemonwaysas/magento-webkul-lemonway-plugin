@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Sirateck_Lemonway extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Sirateck
+ * @package        Sirateck_Lemonway
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+	<sections>
+		<sirateck_lemonway>
+            <groups>
+            	<lemonwaymkt translate="label" module="lemonwaymkt">
+            		<label>Lemonway Marketplace configuration</label>
+   					<frontend_type>text</frontend_type>
+					<comment></comment>
+   					<sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>	                 
+	                     <autocommission translate="label comment" >
+	                     	<label>Auto commission</label>
+	                     	<comment><![CDATA[If <b>No</b> <u>you must fill field Commission amount below</u>.]]></comment>
+	                        <frontend_type>select</frontend_type>
+	                        <source_model>adminhtml/system_config_source_yesno</source_model>
+	                        <sort_order>30</sort_order>
+	                        <show_in_default>1</show_in_default>
+	                        <show_in_website>1</show_in_website>
+	                        <show_in_store>1</show_in_store>
+	                     </autocommission>
+	                      <commission_amount translate="label">
+	                     	<label>Commission amount</label>
+	                        <frontend_type>text</frontend_type>
+	                        <sort_order>40</sort_order>
+	                        <show_in_default>1</show_in_default>
+	                        <show_in_website>1</show_in_website>
+	                        <show_in_store>1</show_in_store>
+	                     </commission_amount>
+	                      <create_wallet translate="label">
+	                     	<label>Automatic wallet creation</label>
+	                        <frontend_type>select</frontend_type>
+	                        <source_model>adminhtml/system_config_source_yesno</source_model>
+	                        <sort_order>60</sort_order>
+	                        <show_in_default>1</show_in_default>
+	                        <show_in_website>1</show_in_website>
+	                        <show_in_store>1</show_in_store>
+	                     </create_wallet>	    
+	                     <!--  <dispatch_payment translate="label">
+	                     	<label>Automatic dispatch payments</label>
+	                        <frontend_type>select</frontend_type>
+	                        <source_model>adminhtml/system_config_source_yesno</source_model>
+	                        <sort_order>40</sort_order>
+	                        <show_in_default>1</show_in_default>
+	                        <show_in_website>1</show_in_website>
+	                        <show_in_store>1</show_in_store>
+	                     </dispatch_payment>	     -->	                 
+                      </fields> 
+             	</lemonwaymkt>
+             </groups>
+		</sirateck_lemonway>
+	</sections>
+</config>

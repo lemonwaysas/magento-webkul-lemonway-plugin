@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Sirateck_Lemonwaymkt extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Sirateck
+ * @package        Sirateck_Lemonwaymkt
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <Sirateck_Lemonwaymkt>
+            <version>0.1.1</version>
+        </Sirateck_Lemonwaymkt>
+    </modules>
+    <global>
+        <resources>
+            <lemonwaymkt_setup>
+                <setup>
+                    <module>Sirateck_Lemonwaymkt</module>
+                    <class>Sirateck_Lemonwaymkt_Model_Resource_Setup</class>
+                </setup>
+            </lemonwaymkt_setup>
+        </resources>
+         <blocks>
+            <lemonwaymkt>
+                <class>Sirateck_Lemonwaymkt_Block</class>
+            </lemonwaymkt>
+        </blocks>
+        <helpers>
+            <lemonwaymkt>
+                <class>Sirateck_Lemonwaymkt_Helper</class>
+            </lemonwaymkt>
+        </helpers>
+        <models>
+            <lemonwaymkt>
+                <class>Sirateck_Lemonwaymkt_Model</class>
+                <resourceModel>sirateck_lemonwaymkt_resource</resourceModel>
+            </lemonwaymkt>
+            <lemonwaymkt_resource>
+                <class>Sirateck_Lemonwaymkt_Model_Resource</class>
+            </lemonwaymkt_resource>
+        </models>
+        <events>
+        	<core_abstract_save_after>
+                <observers>
+                   <lemonwaymkt_create_wallet>
+                      <type>singleton</type>
+                      <class>lemonwaymkt/observer</class>
+                      <method>createWallet</method>
+                   </lemonwaymkt_create_wallet>
+               </observers>
+            </core_abstract_save_after>
+            <core_abstract_save_before>
+            	<observers>
+            		<lemonwaymkt_send_payment_wallet>
+                      <type>singleton</type>
+                      <class>lemonwaymkt/observer</class>
+                      <method>sendPaymentToWallet</method>
+                   </lemonwaymkt_send_payment_wallet>
+            	</observers>
+            </core_abstract_save_before>
+        </events>
+    </global>
+    <frontend>
+		<secure_url>
+            <lemonwaymkt>/lemonwaymkt</lemonwaymkt>
+        </secure_url>
+        <routers>
+            <lemonwaymkt>
+                <use>standard</use>
+                <args>
+                    <module>Sirateck_Lemonwaymkt</module>
+                    <frontName>lemonwaymkt</frontName>
+                </args>
+            </lemonwaymkt>
+        </routers>
+		<translate>
+            <modules>
+                <Sirateck_Lemonwaymkt>
+                    <files>
+                        <default>Sirateck_Lemonwaymkt.csv</default>
+                    </files>
+                </Sirateck_Lemonwaymkt>
+            </modules>
+        </translate>
+         <layout>
+            <updates>
+                <lemonwaymkt>
+                    <file>lemonwaymkt.xml</file>
+                </lemonwaymkt>
+            </updates>
+        </layout>
+	</frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Sirateck_Lemonwaymkt>
+                    <files>
+                        <default>Sirateck_Lemonwaymkt.csv</default>
+                    </files>
+                </Sirateck_Lemonwaymkt>
+            </modules>
+        </translate>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Sirateck_Lemonwaymkt before="Mage_Adminhtml">Sirateck_Lemonwaymkt_Adminhtml</Sirateck_Lemonwaymkt>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <default>
+		<sirateck_lemonway>
+			<lemonwaymkt>			
+				<autocommission>1</autocommission>
+				<commission_amount></commission_amount>
+				<create_wallet>1</create_wallet>
+				<dispatch_payment>0</dispatch_payment>
+			</lemonwaymkt>
+		</sirateck_lemonway>
+	</default>
+</config>

@@ -1,0 +1,41 @@
+<?php /* @var $this Sirateck_Lemonwaymkt_Block_Account */ ?>
+<?php
+/* @var $wallet Sirateck_Lemonway_Model_Apikit_Apimodels_Wallet */ 
+$_wallet = $this->getWalletDetails()->wallet; 
+?>
+<div class="dashboard">
+    <div class="page-title">
+        <h1><?php echo $this->__('Lemonway payment') ?></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+	<form action="<?php echo $this->getUrl('lemonwaymkt/account/uploadDocPost')?>" method="post" enctype="multipart/form-data">
+		<div class="fieldset">
+			<h2 class="legend"><?php echo $this->__('Document upload') ?></h2>
+			<ul class="form-list">
+				<li class="wide">
+                	<label for="doc_type" class="required"><?php echo $this->__('Document type')?></label>
+	                <div class="input-box">
+	                	<select id="doc_type" name="doc_type">
+	                		<option value=""><?php echo $this->__('Select a document type')?></option>
+	                		<?php foreach ($this->getDocumentsType() as $code=>$type):?>
+	                			<option value="<?php echo $code?>"><?php echo $this->__($type)?></option>
+	                		<?php endforeach;?>
+	                	</select>
+	                </div>
+            	</li>
+				<li class="wide">
+                	<label for="document_file" class="required"><?php echo $this->__('Document to upload')?></label>
+	                <div class="input-box">
+	                	 <input name="MAX_FILE_SIZE" type="hidden" value="<?php echo 4096 * 1000?>" />
+       					 <input name="document_file" id="document_file" class="input-text" type="file" />
+	                </div>
+            	</li>
+			</ul>
+		</div>
+		<div class="buttons-set">
+        	<p class="back-link"><a href="<?php echo $this->getUrl('lemonwaymkt/account/') ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        	<button type="submit" class="button" title="<?php echo $this->__('Do my money out') ?>"><span><span><?php echo $this->__('Upload') ?></span></span></button>
+    </div>
+	</form>
+
+</div>

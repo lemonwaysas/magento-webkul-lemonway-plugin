@@ -1,0 +1,11 @@
+<?php 
+$magentoCurrentUrl = Mage::helper('core/url')->getCurrentUrl(); 
+?>	
+<li  <?php echo strpos($magentoCurrentUrl,'lemonwaymkt/account')? "class=current":"";?>>
+	<?php if(strpos($magentoCurrentUrl,'lemonwaymkt/account')){ ?>
+		<strong><?php echo $this->__('Lemonway payment') ?></strong>
+	<?php }
+	else{ ?>
+		<a href="<?php echo $this->getUrl('lemonwaymkt/account/index'); ?>"><?php echo $this->__('Lemonway payment') ?></a>
+	<?php } ?>					
+</li>

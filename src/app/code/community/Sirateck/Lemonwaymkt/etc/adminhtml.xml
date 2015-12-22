@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Sirateck_Lemonwaymkt extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Sirateck
+ * @package        Sirateck_Lemonwaymkt
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <sirateck_lemonway translate="title" module="sirateck_lemonway">
+                                        <title>Lemonway</title>
+                                    </sirateck_lemonway>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <sales>
+                        <children>
+                            <sirateck_lemonway translate="title" module="sirateck_lemonway">
+                                <title>LW</title>
+                                <children>
+                                    <wallet translate="title" module="sirateck_lemonway">
+                                        <title>Wallet</title>
+                                        <sort_order>200</sort_order>
+                                    </wallet>
+                                </children>
+                            </sirateck_lemonway>
+                        </children>
+                    </sales>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+      <menu>
+        <sales>
+            <children>
+                <sirateck_lemonway translate="title" module="sirateck_lemonway">
+                    <title>Lemonway</title>
+                    <sort_order>5</sort_order>
+                    <children>
+                        <wallet translate="title" module="sirateck_lemonway">
+                            <title>Wallet</title>
+                            <action>adminhtml/lemonway_wallet</action>
+                            <sort_order>200</sort_order>
+                        </wallet>
+                    </children>
+                </sirateck_lemonway>            
+             </children>
+        </sales>
+    </menu>
+</config>

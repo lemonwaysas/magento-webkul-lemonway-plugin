@@ -1,0 +1,49 @@
+<?php /* @var $this Mage_Core_Block_Template */ ?>
+<div class="dashboard">
+    <div class="page-title">
+        <h1><?php echo $this->__('Lemonway Payment') ?></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+	<form action="<?php echo $this->getUrl('lemonwaymkt/account/ibanPost')?>" method="post" >
+		<div class="fieldset">
+			<h2 class="legend"><?php echo $this->__('Bank account informations') ?></h2>
+			<ul class="form-list">
+				<li class="wide">
+                	<label for="holder" class="required"><?php echo $this->__('Holder')?></label>
+	                <div class="input-box">
+	                	<input type="text" class="input-text required" id="holder" name="iban_data[holder]" value="" placeholder="<?php echo $this->__('Holder account name')?>" >
+	                </div>
+            	</li>
+				<li class="wide">
+                	<label for="iban" class="required"><?php echo $this->__('Iban')?></label>
+	                <div class="input-box">
+	                	<input type="text" class="input-text required" id="iban" name="iban_data[iban]" value="" placeholder="<?php echo $this->__('Iban Number')?>" >
+	                </div>
+            	</li>
+            	<li class="wide">
+                	<label for="bic" ><?php echo $this->__('Bic')?></label>
+	                <div class="input-box">
+	                	<input type="text"  class="input-text" id="bic" name="iban_data[bic]"  value="" placeholder="<?php echo $this->__('Bic number')?>" >
+	                </div>
+            	</li>
+            	<li class="wide">
+                	<label for="dom1"><?php echo $this->__('Agency')?></label>
+	                <div class="input-box">
+	                	<input type="text" class="input-text" id="dom1" name="iban_data[dom1]"  value="" placeholder="<?php echo $this->__('Agency name')?>" >
+	                </div>
+            	</li>
+            	<li class="wide">
+                	<label for="dom2"><?php echo $this->__('Agency street')?></label>
+	                <div class="input-box">
+	                	<input type="text" class="input-text" id="dom2" name="iban_data[dom2]"  value="" placeholder="<?php echo $this->__('Agency street name')?>" >
+	                </div>
+            	</li>
+			</ul>
+		</div>
+		<div class="buttons-set">
+        	<p class="back-link"><a href="<?php echo $this->getUrl('lemonwaymkt/account/') ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        	<button type="submit" class="button" title="<?php echo $this->__('Save Iban') ?>"><span><span><?php echo $this->__('Save Iban') ?></span></span></button>
+    </div>
+	</form>
+
+</div>
