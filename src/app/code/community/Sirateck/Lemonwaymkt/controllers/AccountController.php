@@ -25,7 +25,33 @@
 require_once 'Mage/Customer/controllers/AccountController.php';
 class Sirateck_Lemonwaymkt_AccountController extends Mage_Customer_AccountController {
 
+	/**
+	 * Action predispatch
+	 *
+	 * Check customer authentication for some actions
+	 */
+	public function preDispatch()
+	{
+		// a brute-force protection here would be nice
 	
+		parent::preDispatch();
+	
+		$action = $this->getRequest()->getActionName();
+		$openActions = array(
+				'index',
+				'createWallet',
+		);
+		$pattern = '/^(' . implode('|', $openActions) . ')/i';
+	
+		if (!preg_match($pattern, $action)) {
+			if (is_null($this->getCustomerWallet()->getId())) {
+				$this->setFlag('', 'no-dispatch', true);
+				throw $e;
+			}
+		} else {
+			$this->_getSession()->setNoReferer(true);
+		}
+	}
 	
 	public function indexAction(){
 		
@@ -43,6 +69,49 @@ class Sirateck_Lemonwaymkt_AccountController extends Mage_Customer_AccountContro
 		$this->renderLayout();
 		
 		return $this;
+	}
+	
+	public function createWalletAction(){
+		
+		
+		$wallet = $this->getCustomerWallet();
+		$this->_redirect('*/*/index');
+		
+		if($wallet->getId())
+		{
+			$this->_getSession()->addError($this->__('You already have a wallet!'));
+			
+		}
+		else{
+			$customer = $this->_getSession()->getCustomer();
+			$userProfile = Mage::getModel('marketplace/userprofile')->load($customer->getId(),'mageuserid');
+			
+			if($userProfile->getId()){
+				
+				if((int)$userProfile->getWantpartner() == 1)
+				{
+					try {
+							
+						$this->_getHelper()->registerWallet($customer, $userProfile);
+						$this->_getSession()->addSuccess($this->__('Wallet created.'));
+						return $this;
+					} catch (Exception $e) {
+						$this->_getSession()->addError($e->getMessage());
+						
+					}
+					
+				}
+				else{
+					$this->_getSession()->addError($this->__("Your account is not validated!"));
+				}
+				
+			}
+			else{
+				$this->_getSession()->addError($this->__('You are not a merchant partner!'));
+			}
+
+		}
+		
 	}
 	
 	public function uploadDocPostAction(){
@@ -306,6 +375,7 @@ class Sirateck_Lemonwaymkt_AccountController extends Mage_Customer_AccountContro
 	protected function _getHelper(){
 		return Mage::helper('lemonwaymkt');
 	}
+		
 	
 	
 }

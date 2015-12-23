@@ -1,7 +1,7 @@
 <?php /* @var $this Sirateck_Lemonwaymkt_Block_Account */?>
 <?php
-/* @var $wallet Sirateck_Lemonway_Model_Apikit_Apimodels_Wallet */ 
-$_wallet = $this->getWalletDetails()->wallet; 
+/* @var $_wallet Sirateck_Lemonway_Model_Wallet*/
+$_wallet = $this->getCustomerWallet();
 ?>
 <div class="dashboard">
     <div class="page-title">
@@ -21,6 +21,10 @@ $_wallet = $this->getWalletDetails()->wallet;
             		</div>
 		            <div class="box-content">
 		            	<?php if($this->hasWallet()):?>
+		            	<?php
+		            			/* @var $_wallet Sirateck_Lemonway_Model_Apikit_Apimodels_Wallet */
+		            			$_walletDetails = $this->getWalletDetails()->wallet;  
+		            		?>
 		                     <table cellspacing="0" class="form-list" style="width:100%">
 				            <tr>
 				                <td class="label"><label ><?php echo $this->__('Wallet ID')?></label></td>
@@ -31,81 +35,85 @@ $_wallet = $this->getWalletDetails()->wallet;
 				            <tr>
 				                <td class="label"><label ><?php echo $this->__('Balance')?></label></td>
 				                <td class="value">
-				                    <strong><?php echo $this->formatPrice($_wallet->getBal())?></strong>
+				                    <strong><?php echo $this->formatPrice($_walletDetails->getBal())?></strong>
 				                </td>
 				            </tr>
 				            <tr>
 				                <td class="label"><label ><?php echo $this->__('Owner name')?></label></td>
 				                <td class="value">
-				                    <strong><?php echo $_wallet->getName() ?></strong>
+				                    <strong><?php echo $_walletDetails->getName() ?></strong>
 				                </td>
 				            </tr>
 				            <tr>
 				                <td class="label"><label ><?php echo $this->__('Owner email')?></label></td>
 				                <td class="value">
-				                    <strong><?php echo $_wallet->getEmail() ?></strong>
+				                    <strong><?php echo $_walletDetails->getEmail() ?></strong>
 				                </td>
 				            </tr>
 				            <tr>
 				                <td class="label"><label ><?php echo $this->__('Status')?></label></td>
 				                <td class="value">
-				                    <strong><?php echo $this->getWalletStatusLabel($_wallet->getStatus()) ?></strong>
+				                    <strong><?php echo $this->getWalletStatusLabel($_walletDetails->getStatus()) ?></strong>
 				                </td>
 				            </tr>
 				             <tr>
 				                <td class="label"><label ><?php echo $this->__('Documents')?></label></td>
 				                <td class="value">
-				                   <?php echo $this->__('<strong>%d</strong> document(s) uploaded.',count($_wallet->getKycDocs())) ?><br /> 
+				                   <?php echo $this->__('<strong>%d</strong> document(s) uploaded.',count($_walletDetails->getKycDocs())) ?><br /> 
 				                    <a href="<?php echo $this->getUrl('lemonwaymkt/account/uploadDoc') ?>"><?php echo $this->__('Upload a new document')?></a>
 				                </td>
 				            </tr>
 				        </table>
 		                <?php else:?>
 		                	<p><?php echo $this->__("You don't have a wallet!")?></p>
+		                	<a href="<?php echo $this->getUrl('lemonwaymkt/account/createWallet') ?>"><?php echo $this->__('Create my wallet') ?></a>
 		                <?php endif;?>
 		            </div>
         		</div>
     		</div><!-- End Col-1 wallet -->
 	    	<div class="col-2">
-	        	<div class="box">
-	            	<div class="box-title">
-	                	<h3><?php echo $this->__('Ibans') ?></h3>
-				     </div>
-		            <div class="box-content">
-						<?php if(count($this->getIbans()) > 0) :?>
-	                		<table cellspacing="0" class="data-table"  id="ibans_table" style="width:100%">
-	                			<col width="1"  />
-							    <col width="1"  />
-							    <col  />
-								<thead>
-									<tr>
-										<th><?php echo $this->__('Account number')?></th>
-										<!--  <th><?php echo $this->__('Bic')?></th>-->
-										<th><?php echo $this->__('Holder')?></th>
-										<th><?php echo $this->__('Status')?></th>
-									</tr>
-								</thead>
-								<tbody>
-								<?php foreach ($this->getIbans() as $iban):?>
-									<tr class="">
-										<td><?php echo $iban->getIban()?></td>
-										<!--  <td><?php echo $iban->getBic()?></td>-->
-										<td><?php echo $iban->getHolder()?></td>
-										<td><?php echo $iban->getStatusId()?></td>
-									</tr>
-								<?php endforeach;?>
-								</tbody>
-							</table>
-							<script type="text/javascript">decorateTable('ibans_table');</script>
-	                	<?php else:?>
-	                		<p><?php echo $this->__("You don't have any Iban!")?></p>
-	                	<?php endif;?>
-	                	<a href="<?php echo $this->getUrl('lemonwaymkt/account/addIban') ?>"><?php echo $this->__('Add an Iban') ?></a>
-				    </div>
-				</div>
+	    		<?php if($this->hasWallet()):?>
+		        	<div class="box">
+		            	<div class="box-title">
+		                	<h3><?php echo $this->__('Ibans') ?></h3>
+					     </div>
+			            <div class="box-content">
+							<?php if(count($this->getIbans()) > 0) :?>
+		                		<table cellspacing="0" class="data-table"  id="ibans_table" style="width:100%">
+		                			<col width="1"  />
+								    <col width="1"  />
+								    <col  />
+									<thead>
+										<tr>
+											<th><?php echo $this->__('Account number')?></th>
+											<!--  <th><?php echo $this->__('Bic')?></th>-->
+											<th><?php echo $this->__('Holder')?></th>
+											<th><?php echo $this->__('Status')?></th>
+										</tr>
+									</thead>
+									<tbody>
+									<?php foreach ($this->getIbans() as $iban):?>
+										<tr class="">
+											<td><?php echo $iban->getIban()?></td>
+											<!--  <td><?php echo $iban->getBic()?></td>-->
+											<td><?php echo $iban->getHolder()?></td>
+											<td><?php echo $iban->getStatusId()?></td>
+										</tr>
+									<?php endforeach;?>
+									</tbody>
+								</table>
+								<script type="text/javascript">decorateTable('ibans_table');</script>
+		                	<?php else:?>
+		                		<p><?php echo $this->__("You don't have any Iban!")?></p>
+		                	<?php endif;?>
+		                	<a href="<?php echo $this->getUrl('lemonwaymkt/account/addIban') ?>"><?php echo $this->__('Add an Iban') ?></a>
+					    </div>
+					</div>
+				<?php endif;?>
 			</div><!-- End Col-2 iban -->
 		</div><!-- End Col-2-set -->
   </div><!-- End box account-info-->
+  <?php if($this->hasWallet()):?>
   <div class="box-account box-info">
         <div class="box-head">
             <h2><?php echo $this->__('Money out') ?></h2>
@@ -139,6 +147,7 @@ $_wallet = $this->getWalletDetails()->wallet;
         <?php endif;?>
         <div class="buttons-set">
         	<a  href="<?php echo $this->getUrl('lemonwaymkt/account/doMoneyout')?>" class="button" title="<?php echo $this->__('Do a money out') ?>"><span><span><?php echo $this->__('Do a money out') ?></span></span></a>
-    </div>
+    	</div>
   </div>
+  <?php endif;?>
 </div>

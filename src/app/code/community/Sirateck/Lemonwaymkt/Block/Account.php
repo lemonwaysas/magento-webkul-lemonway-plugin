@@ -7,18 +7,29 @@ class Sirateck_Lemonwaymkt_Block_Account extends Mage_Core_Block_Template{
 	
 	protected $_moneyouts = null;
 	
+	protected $_wallet = null;
+	
 	/**
 	 * @return Sirateck_Lemonway_Model_Apikit_Apiresponse
 	 */
 	public function getWalletDetails(){
 		if(is_null($this->_walletDetails))
 		{
-			
 			$this->_walletDetails = $this->_getHelper()->getWalletDetails($this->getCustomer()->getId());
 		}
 	
 		return $this->_walletDetails;
 	
+	}
+	
+	public function getCustomerWallet(){
+		if(is_null($this->_wallet)){
+			
+			$this->_wallet = Mage::getModel('sirateck_lemonway/wallet')->load($this->getCustomer()->getId(),'customer_id');
+		}
+		
+		return $this->_wallet;
+		
 	}
 	
 	/**
@@ -53,7 +64,7 @@ class Sirateck_Lemonwaymkt_Block_Account extends Mage_Core_Block_Template{
 	}
 	
 	public function hasWallet(){
-		return is_null($this->getWalletDetails()) || !$this->getWalletDetails()->lwError;
+		return !is_null($this->getCustomerWallet()->getId());
 	}
 	
 	public function formatPrice($price){
@@ -93,7 +104,7 @@ class Sirateck_Lemonwaymkt_Block_Account extends Mage_Core_Block_Template{
 		$status_id = (int)$status_id;
 		$statuesLabel = Sirateck_Lemonway_Model_Wallet::$statuesLabel;
 		if(isset($statuesLabel[$status_id]))
-			return $statuesLabel[$status_id];
+			return $this->__($statuesLabel[$status_id]);
 		return $this->__("N/A");
 	}
 	

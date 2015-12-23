@@ -198,9 +198,23 @@
 "You can't paid amount upper of your balance amount: %s","You can't paid amount upper of your balance amount: %s"
 "Moneyout from Magento module by cutomer %s","Moneyout from Magento module by cutomer %s"
 "You paid %s to your Iban %s from your wallet <b>%s</b>","You paid %s to your Iban %s from your wallet <b>%s</b>"
+"Create my wallet","Create my wallet"
+"You already have a wallet!","You already have a wallet!"
+"Wallet created.","Wallet created."
+"Your account is not validated!","Your account is not validated!"
+"You are not a merchant partner!","You are not a merchant partner!"
+"You must to create wallet before!","You must to create wallet before!"
+"Document only received","Document only received"
+"Document checked and accepted","Document checked and accepted"
+"Document checked but not accepted","Document checked but not accepted"
+"Document replaced by another document","Document replaced by another document"
+"Document validity expired","Document validity expired"
+"ID card (UE)","ID card (UE)"
+"Proof of address","Proof of address"
+"RIB","RIB"
+"Passport (UE)","Passport (UE)"
+"Passport (Not UE)","Passport (Not UE)"
+"Residence permit","Residence permit"
+"Kbis","Kbis"
+"Miscellaneous","Miscellaneous"
 
-
-
-
-
-
