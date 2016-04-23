@@ -100,7 +100,7 @@ class Sirateck_Lemonwaymkt_Helper_Data extends Mage_Core_Helper_Abstract
 		try {
 			
 			$res = $kit->RegisterWallet($params);
-			if(isset($res->lwError) && (int)$res->lwError->CODE != 152)
+			if(isset($res->lwError) && (int)$res->lwError->getCode() != 152)
 			{
 				throw new Exception($res->lwError->getMessage(), (int)$res->lwError->getCode(),null);
 			}
