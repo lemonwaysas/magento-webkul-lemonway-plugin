@@ -1,6 +1,8 @@
 <?php 
+$partner = Mage::getModel('marketplace/userprofile')->isPartner(Mage::getSingleton('customer/session')->getCustomerId()); 
 $magentoCurrentUrl = Mage::helper('core/url')->getCurrentUrl(); 
 ?>	
+<?php if($partner):?>
 <li  <?php echo strpos($magentoCurrentUrl,'lemonwaymkt/account')? "class=current":"";?>>
 	<?php if(strpos($magentoCurrentUrl,'lemonwaymkt/account')){ ?>
 		<strong><?php echo $this->__('Lemonway payment') ?></strong>
@@ -9,3 +11,4 @@ $magentoCurrentUrl = Mage::helper('core/url')->getCurrentUrl();
 		<a href="<?php echo $this->getUrl('lemonwaymkt/account/index'); ?>"><?php echo $this->__('Lemonway payment') ?></a>
 	<?php } ?>					
 </li>
+<?php endif;?>

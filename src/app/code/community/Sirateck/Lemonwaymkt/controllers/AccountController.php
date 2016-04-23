@@ -35,7 +35,13 @@ class Sirateck_Lemonwaymkt_AccountController extends Mage_Customer_AccountContro
 		// a brute-force protection here would be nice
 	
 		parent::preDispatch();
-	
+		$partner = Mage::getModel('marketplace/userprofile')->isPartner(Mage::getSingleton('customer/session')->getCustomerId());
+		
+		if(!$partner){
+			$this->setFlag('', 'no-dispatch', true);
+			return $this;
+		}
+		
 		$action = $this->getRequest()->getActionName();
 		$openActions = array(
 				'index',
@@ -44,9 +50,9 @@ class Sirateck_Lemonwaymkt_AccountController extends Mage_Customer_AccountContro
 		$pattern = '/^(' . implode('|', $openActions) . ')/i';
 	
 		if (!preg_match($pattern, $action)) {
+			
 			if (is_null($this->getCustomerWallet()->getId())) {
 				$this->setFlag('', 'no-dispatch', true);
-				throw $e;
 			}
 		} else {
 			$this->_getSession()->setNoReferer(true);
