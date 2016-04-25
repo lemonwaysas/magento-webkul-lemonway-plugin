@@ -70,7 +70,7 @@ class Sirateck_Lemonwaymkt_Model_Observer{
 					"debitWallet"	=> Mage::getSingleton('sirateck_lemonway/config')->getWalletMerchantId(),
 					"creditWallet"	=> $wallet->getWalletId(),
 					"amount"		=> number_format((float)$saleslist->getActualparterprocost(), 2, '.', ''),
-					"message"		=> Mage::helper('lemonwaymkt')->__('Send payment for order %s',$order->getIncrementId()),
+					"message"		=> Mage::helper('lemonwaymkt')->__('Send payment for product %s in order %s',$saleslist->getMageproname(),$order->getIncrementId()),
 					//"scheduledDate" => "",
 					//"privateData"	=> "",
 			);
@@ -96,12 +96,27 @@ class Sirateck_Lemonwaymkt_Model_Observer{
 					{
 						//change transaction informations;
 						$transaction = Mage::getModel('marketplace/sellertransaction')->load($saleslist->getTransid(),'transid');
-						Mage::log($transaction->debug(),null,"debug_send_payment.log");
+						
 						if($transaction->getTransid())
 						{
 							$transaction->setType('Manual');
 							$transaction->setMethod('Lemonway');
 							$transaction->save();
+							
+							$params = array(
+									"debitWallet"	=> Mage::getSingleton('sirateck_lemonway/config')->getWalletMerchantId(),
+									"creditWallet"	=> "SC",
+									"amount"		=> number_format((float)$saleslist->getTotalcommision(), 2, '.', ''),
+									"message"		=> Mage::helper('lemonwaymkt')->__('Send payment commision for order %s',$order->getIncrementId()),
+							);
+							
+							$res = $kit->SendPayment($params);
+							
+							if(isset($res->lwError))
+							{
+								throw new Exception($res->lwError->getMessage(), (int)$res->lwError->getCode(),null);
+							}
+							
 						}
 							
 					}
