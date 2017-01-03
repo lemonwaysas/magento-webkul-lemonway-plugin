@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<layout version="0.1.0">
+	<layout version="1.0.2">
 		 <customer_account>
 		 	 <reference name="marketplacenavigation">
 		        	<block type="core/template" name="lw.account.link" template="lemonwaymkt/account_link.phtml" />

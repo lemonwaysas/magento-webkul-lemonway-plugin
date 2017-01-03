@@ -5,7 +5,7 @@ return array(
   'summary'                => 'INTEGRATE YOUR TECHNOLOGY, MAKE THE MOST OF OUR SERVICES!',
   'description'            => 'This module work with module Marketplace from webkul',
   'notes'                  => '',
-  'extension_version'      => '0.1.0',
+  'extension_version'      => '1.0.2',
   'skip_version_compare'   => false,
   'auto_detect_version'    => true,
 

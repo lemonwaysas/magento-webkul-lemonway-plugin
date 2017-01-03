@@ -253,8 +253,6 @@ class Sirateck_Lemonwaymkt_Helper_Data extends Mage_Core_Helper_Abstract
                         $total_seller_amt += $actparterprocost;
                         $total_commision += $commision;
             }
-            
-        
         }
         return new Varien_Object(array('total_seller_amount'=>$total_seller_amt,'total_commision'=>$total_commision));
     }

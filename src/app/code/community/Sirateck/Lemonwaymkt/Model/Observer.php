@@ -29,9 +29,7 @@ class Sirateck_Lemonwaymkt_Model_Observer{
                 }
             }
         }
-        
     }
-    
     
     public function sendPaymentToWallet($observer) {
         
