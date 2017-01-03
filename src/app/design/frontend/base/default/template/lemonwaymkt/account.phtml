@@ -136,7 +136,7 @@ $_wallet = $this->getCustomerWallet();
 					<tr class="">
 						<td><?php echo $this->formatPrice($mo->getAmountToPay())?></td>
 						<td><?php echo $this->formatPrice($mo->getNewBal())?></td>
-						<td><?php echo $this->formatDate($mo->getCreateAt())?></td>
+						<td><?php echo $this->formatDate($mo->getCreatedAt())?></td>
 					</tr>
 				<?php endforeach;?>
 				</tbody>
